@@ -12,7 +12,7 @@ const ExpressRESTService = require("express-rest-service");
 const decompress = require('decompress');
 
 const Datastore = require('nedb');
-const db = new Datastore({filename: __dirname + '/db/nodes.db', autoload: true});
+const db = new Datastore({filename: './db/nodes.db', autoload: true});
 
 db.ensureIndex({fieldName: '_id', unique: true}, function (error) {
     !!error && console.error(error);
@@ -95,7 +95,7 @@ const NodeCreate = function (config) {
                     });
                 }
                 else {
-                    const path = __dirname + "/nodes/" + record._id;
+                    const path = "./nodes/" + record._id;
                     if (!fs.existsSync(path)) {
                         fs.mkdirSync(path);
                     }
@@ -246,7 +246,7 @@ const NodeStart = function (config) {
                 }
                 else {
                     const record = records[0];
-                    const path = __dirname + "/nodes/" + id;
+                    const path = "./nodes/" + id;
 
                     const executablesByType = {
                         1: "node",
@@ -444,7 +444,7 @@ const NodeDelete = function (config) {
                     withError = true;
                 }
             }
-            const path = __dirname + "/nodes/" + service.args.id;
+            const path = "./nodes/" + service.args.id;
             db.remove({_id: service.args.id}, {multi: false}, (error, data)=> {
                 if (fs.existsSync(path)) {
                     rimraf(path, () => {
@@ -564,7 +564,7 @@ const NodeUpload = function (config) {
                         });
                     }
                     else {
-                        const path = __dirname + "/nodes/" + record._id;
+                        const path = "./nodes/" + record._id;
                         decompress(request.file.path, path).then(files => {
                             fs.unlinkSync(request.file.path);
                             service.success({data: 1});
@@ -593,8 +593,8 @@ const NodeDownload = function (config) {
                     });
                 }
                 else {
-                    const path = __dirname + "/nodes/" + record._id;
-                    const downloads = __dirname + "/downloads";
+                    const path = "./nodes/" + record._id;
+                    const downloads = "./downloads";
                     const filename = record._id + ".zip";
                     const downloadPath = downloads + "/" + filename;
                     if (!fs.existsSync(downloads)) {

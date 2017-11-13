@@ -2,21 +2,21 @@ const http = require('http');
 const server = http.createServer();
 const express = require('express');
 const multer = require('multer');
-const upload = multer({dest: __dirname + '/uploads/'});
+const upload = multer({dest: './uploads/'});
 const bodyParser = require('body-parser');
 const fs = require('fs');
 
-if(!fs.existsSync(__dirname + '/nodes')) {
-	fs.mkdirSync(__dirname + '/nodes');
+if(!fs.existsSync('./nodes')) {
+	fs.mkdirSync('./nodes');
 }
-if(!fs.existsSync(__dirname + '/db')) {
-	fs.mkdirSync(__dirname + '/db');
+if(!fs.existsSync('./db')) {
+	fs.mkdirSync('./db');
 }
-if(!fs.existsSync(__dirname + '/uploads')) {
-	fs.mkdirSync(__dirname + '/uploads');
+if(!fs.existsSync('./uploads')) {
+	fs.mkdirSync('./uploads');
 }
-if(!fs.existsSync(__dirname + '/downloads')) {
-	fs.mkdirSync(__dirname + '/downloads');
+if(!fs.existsSync('./downloads')) {
+	fs.mkdirSync('./downloads');
 }
 
 const NodeRESTService = require("./nodes.services.js");
