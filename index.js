@@ -95,6 +95,6 @@ const errorHandler = (err) => {
 };
 server.on('request', app);
 server.on('error', errorHandler);
-server.listen(3030, () => {
+server.listen(process.env.port || 3030, () => {
     console.log('Listening on ' + server.address().port);
 });
