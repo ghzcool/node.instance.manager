@@ -298,6 +298,7 @@ const NodeStart = function (config) {
                         activeNode.output = cutToMaxLength(activeNode.output, MAX_OUTPUT_LENGTH);
                         activeNode.hasError = true;
                         const date = moment().format(DATE_TIME_FORMAT);
+                        activeNodes[id] = null;
                         updateRecord({_id: id}, {
                             updated: date,
                             started: null,
@@ -403,6 +404,7 @@ const NodeStop = function (config) {
                 let withError = false;
                 try {
                     process.kill(activeNode.pid, 'SIGTERM');
+                    activeNodes[service.args.id] = null;
                 }
                 catch (e) {
                     withError = true;
@@ -439,6 +441,7 @@ const NodeDelete = function (config) {
             if (!!activeNode) {
                 try {
                     process.kill(activeNode.pid, 'SIGTERM');
+                    activeNodes[service.args.id] = null;
                 }
                 catch (e) {
                     withError = true;
@@ -549,7 +552,14 @@ const NodeUpload = function (config) {
             if (!request.file) {
                 service.failure({
                     status: 500,
-                    message: "Error uploading file",
+                    message: "Error uploading file. No file.",
+                    errors: []
+                });
+            }
+            else if(!!activeNodes[service.args.id]) {
+                service.failure({
+                    status: 500,
+                    message: "Error uploading file. Instance is running.",
                     errors: []
                 });
             }
