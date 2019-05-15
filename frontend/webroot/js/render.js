@@ -86,7 +86,9 @@ const render = new function () {
     };
 
     _render.showSystem = function () {
-        $("#mainContentArea").html(processTemplate("systemTemplate", {}));
+        $("#mainContentArea").html(processTemplate("systemTemplate", {
+            version: window.frontendVersion
+        }));
     };
 
     _render.showEnviromentVariables = function () {

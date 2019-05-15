@@ -16,10 +16,12 @@ const rest = new function () {
 		}, config || {});
 	};
 
+	var backendUrl = window.backendHost + ':' + window.backendPort;
+
 	_rest.getSelf = function (success, failure) {
 		$.ajax({
 			type: 'GET',
-			url: '/me',
+			url: backendUrl + '/me',
 			data: null,
 			dataType: 'json',
 			success: success,
@@ -31,7 +33,7 @@ const rest = new function () {
 	_rest.login = function (login, password, success, failure) {
 		$.ajax({
 			type: 'POST',
-			url: '/login',
+			url: backendUrl + '/login',
 			data: {
 				login: login,
 				password: password
@@ -46,7 +48,7 @@ const rest = new function () {
 	_rest.renew = function (success, failure) {
 		$.ajax({
 			type: 'GET',
-			url: '/token/renew',
+			url: backendUrl + '/token/renew',
 			data: null,
 			dataType: 'json',
 			success: success,
@@ -58,7 +60,7 @@ const rest = new function () {
 	_rest.logout = function (success, failure) {
 		$.ajax({
 			type: 'GET',
-			url: '/logout',
+			url: backendUrl + '/logout',
 			data: null,
 			dataType: 'json',
 			success: success,
@@ -70,7 +72,7 @@ const rest = new function () {
 	_rest.getNodes = function (success, failure) {
 		$.ajax({
 			type: 'GET',
-			url: '/nodes',
+			url: backendUrl + '/nodes',
 			data: null,
 			dataType: 'json',
 			success: success,
@@ -82,7 +84,7 @@ const rest = new function () {
 	_rest.getNode = function (id, success, failure) {
 		$.ajax({
 			type: 'GET',
-			url: '/node',
+			url: backendUrl + '/node',
 			data: {id: id},
 			dataType: 'json',
 			success: success,
@@ -94,7 +96,7 @@ const rest = new function () {
 	_rest.getNodeTypes = function (success, failure) {
 		$.ajax({
 			type: 'GET',
-			url: '/node/types',
+			url: backendUrl + '/node/types',
 			data: null,
 			dataType: 'json',
 			success: success,
@@ -106,7 +108,7 @@ const rest = new function () {
 	_rest.getSystemInfo = function (success, failure) {
 		$.ajax({
 			type: 'GET',
-			url: '/system',
+			url: backendUrl + '/system',
 			data: null,
 			dataType: 'json',
 			success: success,
@@ -118,7 +120,7 @@ const rest = new function () {
 	_rest.createNode = function (data, success, failure) {
 		$.ajax({
 			type: 'POST',
-			url: '/node',
+			url: backendUrl + '/node',
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
 			dataType: 'json',
@@ -131,7 +133,7 @@ const rest = new function () {
 	_rest.updateNode = function (data, success, failure) {
 		$.ajax({
 			type: 'PUT',
-			url: '/node',
+			url: backendUrl + '/node',
 			data: JSON.stringify(data),
 			contentType: "application/json; charset=utf-8",
 			dataType: 'json',
@@ -144,7 +146,7 @@ const rest = new function () {
 	_rest.deleteNode = function (id, success, failure) {
 		$.ajax({
 			type: 'DELETE',
-			url: '/node',
+			url: backendUrl + '/node',
 			data: {id: id},
 			dataType: 'json',
 			success: success,
@@ -156,7 +158,7 @@ const rest = new function () {
 	_rest.startNode = function (id, success, failure) {
 		$.ajax({
 			type: 'PUT',
-			url: '/node/start',
+			url: backendUrl + '/node/start',
 			data: {id: id},
 			dataType: 'json',
 			success: success,
@@ -168,7 +170,7 @@ const rest = new function () {
 	_rest.stopNode = function (id, success, failure) {
 		$.ajax({
 			type: 'PUT',
-			url: '/node/stop',
+			url: backendUrl + '/node/stop',
 			data: {id: id},
 			dataType: 'json',
 			success: success,
