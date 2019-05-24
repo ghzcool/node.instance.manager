@@ -1,2 +1,2 @@
-require('./frontend/index.js');
-require('./backend/index.js');
+require('node-instance-manager-api');
+require('node-instance-manager-gui');
